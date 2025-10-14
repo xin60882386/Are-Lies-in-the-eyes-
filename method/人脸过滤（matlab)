@@ -1,0 +1,31 @@
+folderPath = ''; % 图像存储的文件夹路径
+images = dir(fullfile(folderPath, '*.jpg')); % 读取所有jpg图像
+
+% 加载人脸检测器，这里使用级联对象检测器
+faceDetector = vision.CascadeObjectDetector();
+faceDetector.MergeThreshold = 3;  % 降低此值可能会增加检测到的人脸数量
+
+% 设置边界限制（例如图像边缘10%）
+boundaryLimit = 0.40;
+
+% 遍历文件夹中的每一张图像
+for i = 1:length(images)
+    imagePath = fullfile(folderPath, images(i).name);
+    img = imread(imagePath);
+    imgSize = size(img);
+
+    % 进行人脸检测
+    bboxes = step(faceDetector, img);
+
+    % 输出当前图像路径和检测到的人脸数量
+    fprintf('%s: Detected %d faces.\n', imagePath, size(bboxes, 1));
+
+    % 判断人脸数量和边界位置
+    if size(bboxes, 1) > 1 || any(bboxes(:,1) < imgSize(2) * boundaryLimit | ...
+                                   bboxes(:,2) < imgSize(1) * boundaryLimit | ...
+                                   bboxes(:,1) + bboxes(:,3) > imgSize(2) * (1-boundaryLimit) | ...
+                                   bboxes(:,2) + bboxes(:,4) > imgSize(1) * (1-boundaryLimit))
+        delete(imagePath);
+        fprintf('Removed %s (detected %d faces, possible partial faces)\n', imagePath, size(bboxes, 1));
+    end
+end
