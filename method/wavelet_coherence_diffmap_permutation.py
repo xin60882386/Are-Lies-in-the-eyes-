@@ -11,24 +11,24 @@ from scipy.signal import detrend
 import pywt
 
 # ================== 参数 ==================
-ROOT    = r""   # 根目录（递归遍历）
-OUT_DIR = r""          # 输出目录
-FPS     = 30                         # 帧率（秒↔帧转换）
-SEC_BIN = 1                          # 差值图的时间聚合间隔（秒），可改为 5
+ROOT    = r""   
+OUT_DIR = r""         
+FPS     = 30                        
+SEC_BIN = 1                          
 # WTC 设置
-WAVELET = 'cmor1.5-1.0'              # 复 Morlet；格式 'cmorB-C'（带宽-中心频率）
-NUM_SCALES = 64                      # 频率分辨率（越大越细）
-SMOOTH_T = 2.0                       # WTC 平滑（时间向，高斯σ，单位=窗点数）
-SMOOTH_S = 1.0                       # WTC 平滑（尺度向，高斯σ）
+WAVELET = 'cmor1.5-1.0'             
+NUM_SCALES = 64                     
+SMOOTH_T = 2.0                      
+SMOOTH_S = 1.0                      
 # 置换检验
-N_PERM = 2000                        # 置换次数（>1000 更稳）
-ALPHA  = 0.05                        # 显著性阈值（双尾）
-# 条件关键字（从“文件夹名 或 CSV 文件名”里匹配）
+N_PERM = 2000                       
+ALPHA  = 0.05                       
+
 LIE_KEYWORDS   = [r'lie', r'decep', r'false', r'fake', r'欺骗', r'谎']
 TRUTH_KEYWORDS = [r'true', r'truth', r'honest', r'real', r'真实', r'真话']
 # ====================================================
 
-# === 列名候选（会统一：去空白+小写），命中多少用多少 ===
+# === 列名候选 ===
 FEATURE_COL_CANDIDATES = [
     ["PupilSize","pupil","pupil_size","pupilsize","pupil_diameter"],
     ["IrisSize","iris","iris_size","irissize"],
@@ -218,7 +218,7 @@ def permutation_test_maps(truth_maps, lie_maps, n_perm=1000, alpha=0.05, two_tai
 # ---------------------- 主流程 ----------------------
 def main():
     ensure_dir(OUT_DIR)
-    wtc_stack = []            # 收集所有试次的 WTC（用时间重采样对齐）
+    wtc_stack = []            
     wtc_freq_ref = None
     wtc_time_ref = None
 
@@ -234,7 +234,7 @@ def main():
             trials.append((dirpath, csvs))
 
     if not trials:
-        print("⚠️ 没找到‘恰好 2 个 CSV’的试次。")
+        print(" 没找到‘恰好 2 个 CSV’的试次。")
         return
 
     # 逐试次处理
