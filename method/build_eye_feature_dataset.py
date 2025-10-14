@@ -129,7 +129,7 @@ for subject in tqdm(os.listdir(root_dir), desc="遍历被试"):
                 global_id += 1
 
             except Exception as e:
-                print(f"❌ 错误文件: {file_path} - {str(e)}")
+                print(f" 错误文件: {file_path} - {str(e)}")
 
 # === 保存整合后的静态数据 ===
 static_df = pd.concat(static_all, ignore_index=True)
@@ -139,4 +139,4 @@ static_df.to_csv(os.path.join(output_dir, "static_all.csv"), index=False)
 df_all = pd.DataFrame(dynamic_features)
 df_all.to_csv(os.path.join(output_dir, "dynamic_features_summary.csv"), index=False)
 
-print("✅ 所有特征提取完成（静态 + 动态）")
+print(" 所有特征提取完成（静态 + 动态）")
