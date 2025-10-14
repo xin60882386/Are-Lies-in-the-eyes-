@@ -78,13 +78,13 @@ for name, model in models.items():
     recall = recall_score(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred)
 
-    print(f"\n=== 📌 模型 {name} ===")
-    print(f"✅ Accuracy  = {acc:.3f}")
-    print(f"✅ F1-score  = {f1:.3f}")
-    print(f"✅ AUC       = {auc:.3f}")
-    print(f"✅ Precision = {precision:.3f}")
-    print(f"✅ Recall    = {recall:.3f}")
-    print(f"✅ Confusion Matrix:\n{cm}")
+    print(f"\n===  模型 {name} ===")
+    print(f" Accuracy  = {acc:.3f}")
+    print(f" F1-score  = {f1:.3f}")
+    print(f" AUC       = {auc:.3f}")
+    print(f" Precision = {precision:.3f}")
+    print(f" Recall    = {recall:.3f}")
+    print(f" Confusion Matrix:\n{cm}")
 
     if auc > best_auc:
         best_auc = auc
@@ -95,5 +95,5 @@ for name, model in models.items():
 df["judge_pred"] = best_model.predict(df[feature_cols])
 df.to_csv(r"", index=False)
 
-print(f"\n🏆 最佳模型：{best_model_name}，AUC = {best_auc:.3f}")
-print("✅ judge_pred 已保存！")
+print(f"\n 最佳模型：{best_model_name}，AUC = {best_auc:.3f}")
+print(" judge_pred 已保存！")
