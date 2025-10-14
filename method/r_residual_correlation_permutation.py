@@ -265,7 +265,7 @@ def do_pairing_in_dir(src_dir: Path, dst_dir: Path, move: bool, dry: bool,
         return [], []
     observers, observed, others = split_fixed_roles(files)
     if len(observers)==0 or len(observed)==0:
-        print(f"⚠️ 角色分组异常：{src_dir} | observers={len(observers)}, observed={len(observed)}")
+        print(f"角色分组异常：{src_dir} | observers={len(observers)}, observed={len(observed)}")
 
     if pair_strategy == "zip_order":
         pairs, unmatched = pair_zip_order(observers, observed)
@@ -330,7 +330,7 @@ def analyze_pairs(root: Path, out: Path, features: List[str], pmax: int, ic: str
     ensure_dir(out)
     results = []
 
-    # 预收集所有“恰好2个CSV”的子目录（因为配对后的子文件夹就是2个CSV）
+  
     candidate_dirs = []
     for dirpath, _, files in os.walk(root):
         csvs = [f for f in files if f.lower().endswith(".csv")]
@@ -348,7 +348,7 @@ def analyze_pairs(root: Path, out: Path, features: List[str], pmax: int, ic: str
         else:
             f_obs, f_vid = sorted([f1, f2], key=lambda p: p.name)
 
-        # 读入（高容错）
+        # 读入
         try:
             df_obs = pd.read_csv(f_obs, engine="python", on_bad_lines="skip")
             df_vid = pd.read_csv(f_vid, engine="python", on_bad_lines="skip")
@@ -356,7 +356,7 @@ def analyze_pairs(root: Path, out: Path, features: List[str], pmax: int, ic: str
             print(f"读取失败：{f_obs} | {f_vid} | {e}")
             continue
 
-        # 列名映射（大小写/空白不敏感；含常见别名兜底）
+        # 列名映射
         def norm_cols(cols):
             return {re.sub(r"\s+", " ", c.strip()).lower(): c for c in cols}
         map_obs = norm_cols(df_obs.columns)
@@ -380,7 +380,7 @@ def analyze_pairs(root: Path, out: Path, features: List[str], pmax: int, ic: str
                     if k2 in m: return m[k2]
             return None
 
-        # 情境标签（可选）：从父目录名里用正则抽取（如 tt/tf/ft/ff）
+        # 情境标签：从父目录名里用正则抽取
         condition = None
         try:
             m = re.search(condition_regex, dirpath.name, flags=re.I)
