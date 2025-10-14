@@ -14,8 +14,8 @@ N_PERM = 500
 ALPHA = 0.05  
 FORCE_UNKNOWN_TO = None  # 'truth' / 'lie' / None
 STANDARDIZE = "none"  # 'none' / 'z' / 'relative'
-USE_FDR = True  # 是否对置换 p 值做 FDR(BH) 校正
-SEED = 42  # 随机种子
+USE_FDR = True  
+SEED = 42  
 # ——显示用白名单（原样大写，用在坐标轴标签/CSV展示）——
 DISPLAY_WHITELIST = [
     "PupilSize", "IrisSize", "InnerEyeDistance",
