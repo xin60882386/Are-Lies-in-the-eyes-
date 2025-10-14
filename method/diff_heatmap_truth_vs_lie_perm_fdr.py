@@ -7,11 +7,11 @@ from tqdm import tqdm
 # =============== 参数 ===============
 ROOT = r""
 OUT_DIR = r""
-FPS = 30  # 帧率（秒↔帧转换）
-SEC_BIN = 1  # 每多少秒聚合一次（1 或 5 常用）
-FIXED_T_BINS = 200  # 统一相对时间长度（列数）
-N_PERM = 500  # 置换次数（预跑 500；建议 >= 5000）
-ALPHA = 0.05  # 显著性阈值（双尾）
+FPS = 30  
+SEC_BIN = 1  
+FIXED_T_BINS = 200  
+N_PERM = 500  
+ALPHA = 0.05  
 FORCE_UNKNOWN_TO = None  # 'truth' / 'lie' / None
 STANDARDIZE = "none"  # 'none' / 'z' / 'relative'
 USE_FDR = True  # 是否对置换 p 值做 FDR(BH) 校正
@@ -169,7 +169,7 @@ def plot_diffmap(x, feat_names, D, title, save_path, vmin=None, vmax=None, sig_m
     )
     ax.set_ylim(-0.5, F - 0.5)
     ax.set_yticks(np.arange(F))
-    ax.set_yticklabels(DISPLAY_WHITELIST)  # 显示原样大写
+    ax.set_yticklabels(DISPLAY_WHITELIST)  
 
     ax.set_xlabel('Time (s)' if isinstance(x[0], (int, float)) and x[-1] > 1.1 else 'Relative time')
     ax.set_ylabel('Feature')
@@ -243,7 +243,7 @@ def main():
     agg_dir = os.path.join(OUT_DIR, "_aggregate")
     ensure_dir(agg_dir)
 
-    # 收集试次：每个子目录里“恰好 2 个 CSV”
+   
     trials = []
     for dirpath, _, filenames in os.walk(ROOT):
         csvs = [f for f in filenames if f.lower().endswith(".csv")]
@@ -287,7 +287,7 @@ def main():
             Df, transposed = align_feat_time(D, common, ref_feats=REF_FEATS)
             D_used = Df.values  # (6 × Tbins)
 
-            # 单试次图（真实秒）
+            
             vmin = np.nanpercentile(D_used, 5) if np.isfinite(D_used).any() else None
             vmax = np.nanpercentile(D_used, 95) if np.isfinite(D_used).any() else None
             plot_diffmap(times, REF_FEATS, D_used,
@@ -322,11 +322,11 @@ def main():
             ])
 
         except Exception as e:
-            tqdm.write(f"❌ 试次 {rel} 失败：{e}")
+            tqdm.write(f" 试次 {rel} 失败：{e}")
             per_trial_meta.append(
                 [rel, observed_name, observer_name, condition, 0, 0, 'err', len(MATCH_WHITELIST), str(e)])
 
-    # 写 meta 日志
+    
     ensure_dir(agg_dir)
     meta_cols = ["trial_relpath", "observed_csv", "observer_csv", "condition",
                  "n_common_feats", "n_time_bins", "transposed", "n_missing_ref_feats", "note"]
