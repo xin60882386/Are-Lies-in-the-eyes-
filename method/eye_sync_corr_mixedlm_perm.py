@@ -9,10 +9,7 @@ final_hier_corr_eyefeatures_only.py
   - 群体层：Fisher z → MixedLM(随机截距=Subject) + 被试聚类稳健SE（失败则回退普通 OLS）
   - 显著性：被试内循环平移置换（只滚动“被观察者”时间轴）
 
-输出：
-  - per_trial_eye_features_corr.csv         （逐试次×特征）
-  - summary_overall.csv                     （六特征合并的总体 r̄ 与置换 p）
-  - summary_by_feature.csv                  （六个特征各自的 r̄ 与置换 p）
+
 """
 
 import os
@@ -37,9 +34,9 @@ FEATURES_SCALAR = [
     "TheEyeOpening",
     "EarRatio",
 ]
-CONDITION_COL = "label_video"     # 可改为 "label_judge"
-MIN_LEN = 100                     # 最小有效长度
-N_PERM = 1000                     # 置换次数
+CONDITION_COL = "label_video"    
+MIN_LEN = 100                    
+N_PERM = 1000                    
 OUTPUT_DIR = r"D:\lie\xin\shiyan5\ceshi1"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 # =========================================
@@ -60,14 +57,14 @@ def robust_read_csv(path: str) -> pd.DataFrame:
     raise RuntimeError(f"读取失败：{path}")
 
 def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
-    # 标准化列名：小写 + 下划线（只保留小写列）
+   
     def norm(c):
         c = str(c).strip().replace("\t", " ").replace("-", "_")
         c = re.sub(r"\s+", "_", c)
         return c.lower()
     df = df.copy()
     df.columns = [norm(c) for c in df.columns]
-    # 只保留小写开头（你的数据常有大写版重复）
+    
     df = df[[c for c in df.columns if not re.match(r"^[A-Z]", c)]]
     return df
 
