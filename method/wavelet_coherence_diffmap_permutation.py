@@ -294,7 +294,7 @@ def main():
                 pass
 
         except Exception as e:
-            tqdm.write(f"❌ 试次 {rel} 失败：{e}")
+            tqdm.write(f" 试次 {rel} 失败：{e}")
 
     # ===== A) 聚合 WTC =====
     if wtc_stack:
@@ -357,7 +357,7 @@ def main():
             "significant": sig.flatten().astype(int)
         }).to_csv(os.path.join(agg_dir, "diff_permutation_results.csv"), index=False, encoding="utf-8-sig")
 
-    print("\n✅ 已完成：每试次 WTC+差值图、聚合 WTC、条件差值与置换检验。输出目录：", OUT_DIR)
+    print("\n 已完成：每试次 WTC+差值图、聚合 WTC、条件差值与置换检验。输出目录：", OUT_DIR)
 
 if __name__ == "__main__":
     main()
