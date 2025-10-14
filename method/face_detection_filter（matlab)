@@ -1,11 +1,11 @@
-folderPath = ''; % 图像存储的文件夹路径
-images = dir(fullfile(folderPath, '*.jpg')); % 读取所有jpg图像
+folderPath = ''; 
+images = dir(fullfile(folderPath, '*.jpg'));
 
-% 加载人脸检测器，这里使用级联对象检测器
+% 加载人脸检测器
 faceDetector = vision.CascadeObjectDetector();
-faceDetector.MergeThreshold = 3;  % 降低此值可能会增加检测到的人脸数量
+faceDetector.MergeThreshold = 3;  
 
-% 设置边界限制（例如图像边缘10%）
+% 设置边界限制
 boundaryLimit = 0.40;
 
 % 遍历文件夹中的每一张图像
