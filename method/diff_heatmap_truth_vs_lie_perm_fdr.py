@@ -401,7 +401,7 @@ def main():
         plot_agg(overall_mean, "Mean Difference Map |O - V| (All trials)",
                  os.path.join(agg_dir, "diff_all_trials_mean.png"))
 
-    print("\n✅ 生成完成：查看输出目录：", OUT_DIR)
+    print("\n 生成完成：查看输出目录：", OUT_DIR)
     print("显示特征（纵轴标签）：", DISPLAY_WHITELIST)
     print(f"FIXED_T_BINS={FIXED_T_BINS}, STANDARDIZE={STANDARDIZE}, FDR={USE_FDR}")
 
