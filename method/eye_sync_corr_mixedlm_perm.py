@@ -2,7 +2,7 @@
 """
 final_hier_corr_eyefeatures_only.py
 一次性计算（仅眼部特征）：
-  ✅ 六个眼部特征：PupilSize, IrisSize, InnerEyedistance, Eyeliddistance, TheEyeOpening, EarRatio
+   六个眼部特征：PupilSize, IrisSize, InnerEyedistance, Eyeliddistance, TheEyeOpening, EarRatio
 
 方法：
   - 逐试次：插补→去趋势→z-score→按较短长度对齐→Pearson r
