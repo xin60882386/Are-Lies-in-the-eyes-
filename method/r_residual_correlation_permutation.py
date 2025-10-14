@@ -543,11 +543,11 @@ def main():
             "role_rule": "digit=observer(detector), alpha=observed(deceiver)"
         }, f, ensure_ascii=False, indent=2)
 
-    print("\n✅ 完成：递归配对 + 预白化残差相关 + 最优时滞 + 置换检验！")
-    print(f"📁 结果目录：{dst_root}")
-    print(f"📄 配对汇总：{dst_root/'global_pairing_report.csv'}")
-    print(f"📄 分析结果：{(dst_root/'ar_results'/'per_pair_feature_results.csv')}")
-    print(f"📄 组级汇总：{(dst_root/'ar_results'/'per_pair_mean_over_features.csv')}")
+    print("\n 完成：递归配对 + 预白化残差相关 + 最优时滞 + 置换检验！")
+    print(f" 结果目录：{dst_root}")
+    print(f" 配对汇总：{dst_root/'global_pairing_report.csv'}")
+    print(f" 分析结果：{(dst_root/'ar_results'/'per_pair_feature_results.csv')}")
+    print(f" 组级汇总：{(dst_root/'ar_results'/'per_pair_mean_over_features.csv')}")
 
 if __name__ == "__main__":
     main()
