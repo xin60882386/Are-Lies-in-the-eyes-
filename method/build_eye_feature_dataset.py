@@ -4,8 +4,8 @@ import numpy as np
 from tqdm import tqdm
 
 # === 自定义路径 ===
-root_dir = r""        # 所有被试数据的总目录
-output_dir = r""       # 输出结果目录
+root_dir = r""        
+output_dir = r""       
 os.makedirs(output_dir, exist_ok=True)
 
 # === 欧氏距离函数（同帧或跨帧） ===
