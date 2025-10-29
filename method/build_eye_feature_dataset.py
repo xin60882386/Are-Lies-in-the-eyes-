@@ -32,10 +32,10 @@ def compute_ear(df):
     result = []
     for i in range(len(df)):
         try:
-            L1 = np.sqrt((df['eye_lmk_X_11'][i] - df['eye_lmk_X_17'][i]) ** 2 + (df['eye_lmk_Y_11'][i] - df['eye_lmk_Y_17'][i]) ** 2)
-            H1 = np.sqrt((df['eye_lmk_X_8'][i] - df['eye_lmk_X_14'][i]) ** 2 + (df['eye_lmk_Y_8'][i] - df['eye_lmk_Y_14'][i]) ** 2)
+            H1 = np.sqrt((df['eye_lmk_X_11'][i] - df['eye_lmk_X_17'][i]) ** 2 + (df['eye_lmk_Y_11'][i] - df['eye_lmk_Y_17'][i]) ** 2)
+            L1 = np.sqrt((df['eye_lmk_X_8'][i] - df['eye_lmk_X_14'][i]) ** 2 + (df['eye_lmk_Y_8'][i] - df['eye_lmk_Y_14'][i]) ** 2)
             if H1 != 0:
-                result.append(round(L1 / H1, 4))
+                result.append(round(H1 / L1, 4))
             else:
                 result.append(np.nan)
         except:
